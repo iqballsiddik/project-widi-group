@@ -1,0 +1,56 @@
+.card {
+  background: #d9dbf9;
+  border-radius: 10px;
+  color: white;
+  height: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.button {
+  color: #2c3780;
+  margin: 0.5rem;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.button_home {
+  color: white;
+  font-size: 1.2rem;
+  width: 80%;
+  margin-bottom: 1.5rem;
+}
+
+.button_keluar {
+  color: white;
+  font-size: 1.2rem;
+  width: 80%;
+  margin-top: 1.5rem;
+}
+
+.dashboard_logo {
+  margin: 1rem 0 5rem 0;
+  height: 50px;
+}
+
+.button_keluar:hover,
+.button_home:hover,
+.button:hover {
+  cursor: pointer;
+}
+
+.button::selection {
+  border: 1px solid white;
+  border-radius: 5px;
+}
