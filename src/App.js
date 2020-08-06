@@ -9,14 +9,14 @@ import {
 } from "react-router-dom";
 
 import Dashboard from '../src/views/Dashboard';
+import Login from './views/Login';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/">
-          <Dashboard />
-        </Route>
+        <Route path='/' exact component={Dashboard} />
+        <Route path='/login' exact component={Login} />
       </Switch>
     </Router>
   );

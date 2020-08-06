@@ -11,7 +11,7 @@ const MainSectionViewer = ({ item }) => {
 			{
 				{
 					"menu1": <p>kjhgf</p>,
-
+					"menu4": <p>Form</p>,
 				}[item]
 			}
 		</React.Fragment>

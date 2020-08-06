@@ -12,10 +12,10 @@ import styles from './Sidebar.module.css';
 
 const MenuItem = ({ item, keys, action, active }) => {
 	// console.log("pathname ",useLocation().pathname);
-	const locationHasilSurveyor = useLocation().pathname == '/adminsurveyor/detail-issue' ? 'HASIL SURVEY' : "";
+	// const locationHasilSurveyor = useLocation().pathname == '/adminsurveyor/detail-issue' ? 'HASIL SURVEY' : "";
 	const onClick = () => action(item);
 	const customStyle = {
-		background: `${(active === item || active === locationHasilSurveyor) ? "#f4f5ff" : "#d9dbf9"}`,
+		background: `${(active === item) ? "#f4f5ff" : "#d9dbf9"}`,
 	}
 	return (
 		<div className={styles.button} style={customStyle} onClick={onClick} key={keys}>
@@ -41,10 +41,6 @@ const Logout = () => {
 const Sidebar = ({ active, action }) => {
 	const menulist = ["menu1", "menu2"]
 	return (
-		// <RootContext.Consumer>
-		// 	{({ menulist }) => {
-		// return (
-
 		<div className={styles.card}>
 			<React.Fragment>
 				{menulist.map((menu, index) => {
@@ -58,9 +54,7 @@ const Sidebar = ({ active, action }) => {
 			</React.Fragment>
 			<Logout />
 		</div>
-		// )
-		// }}
-		// </RootContext.Consumer>
+		
 	)
 }
 

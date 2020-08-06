@@ -1,0 +1,97 @@
+body,
+text{
+    font-weight: 600 !important;
+}
+
+.wrap-login{
+    width: 30%;
+    position: relative;
+    display: block;
+    padding: 10px !important;
+    margin: 10px 0 10px 0 !important;
+    top: -50% !important;
+    transform: translate(0,100%) !important;
+}
+
+.wrap-login .lbl-login{
+    display: block;
+}
+
+.wrap-login .input{
+    width: 100%;
+    color: #999;
+    background-color: #222;
+    border: 1 solid #ffff !important;
+    border-radius: 6px;
+    transition: ease-in 1s;
+    justify-content: center !important;
+    margin: 0 0 0 40px;
+    padding: 10px !important;
+}
+
+.wrap-login .input:focus{
+    color: #999;
+    background-color: #fff;
+    border: 1 solid #000 !important;
+    border-radius: 6px;
+    transition: ease-in 1s;
+}
+
+.btn-login{
+    display: block;
+    padding: 10px;
+    width: 81%;
+    border-radius: 6px;
+    border: none !important;
+    background-color: #666;
+    margin: 10px 10px 0 40px;
+}
+
+.btn-login:hover{
+    color: #fff;
+    background-color: #999;
+    transition: ease-in 0.5s;
+}
+
+.forgot-pass{
+    font-size: 8px;
+    font-weight: bold;
+    color: rgb(139, 15, 15);
+}
+
+.forgot-pass:hover{
+    color: rgba(139, 15, 15, 0.6);;
+}
+
+@media only screen and (max-width: 1024px){
+    .wrap-login{
+        width: 100%;
+    }
+    .wrap-login .input{
+        margin: 0 60px 0 0;
+    }
+}
+
+@media only screen and (max-width: 720px){
+    .wrap-login{
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 420px){
+    .wrap-login{
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 375px){
+    .wrap-login{
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 144px){
+    .wrap-login{
+        width: 100%;
+    }
+}
