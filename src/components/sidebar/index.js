@@ -1,23 +1,24 @@
+// import React from './node_modules/react';
 import React from 'react';
-import {
-	Card, CardImg, CardText, CardBody,
-	CardTitle, CardSubtitle, Button, Container, ListGroup, ListGroupItem
-} from 'reactstrap';
+import { Button } from 'reactstrap';
 import {
 	BrowserRouter as Router,
 	useLocation,
 	useHistory
 } from "react-router-dom";
 import styles from './Sidebar.module.css';
+import RootContext from '../../context';
 
 const MenuItem = ({ item, keys, action, active }) => {
-	// console.log("pathname ",useLocation().pathname);
-	// const locationHasilSurveyor = useLocation().pathname == '/adminsurveyor/detail-issue' ? 'HASIL SURVEY' : "";
+	console.log(active, "this");
 	const onClick = () => action(item);
+	// buat style untuk active
 	const customStyle = {
 		background: `${(active === item) ? "#f4f5ff" : "#d9dbf9"}`,
+		padding: '15px'
 	}
 	return (
+		// menampilkan button side menu
 		<div className={styles.button} style={customStyle} onClick={onClick} key={keys}>
 			<b>{item}</b>
 		</div>
@@ -33,28 +34,37 @@ const Logout = () => {
 
 	return (
 		<div className={styles.button} onClick={onClick}>
-			<b>KELUAR</b>
+			<Button color="danger">LOGOUT</Button>{' '}
 		</div>
 	)
 }
 
 const Sidebar = ({ active, action }) => {
-	const menulist = ["menu1", "menu2"]
 	return (
-		<div className={styles.card}>
-			<React.Fragment>
-				{menulist.map((menu, index) => {
-					return <MenuItem
-						item={menu}
-						key={index}
-						action={action}
-						active={active}
-					/>
-				})}
-			</React.Fragment>
-			<Logout />
-		</div>
-		
+		// Consumer dari value AdminProvider
+		<RootContext.Consumer>
+			{
+				({ menulist }) => {
+					return (
+						<div className={styles.card}>
+							<h1>logo</h1>
+							<React.Fragment>
+								{/*  manu di looping sebanyak kirim menulist */}
+								{menulist.map((menu, index) => {
+									return <MenuItem
+										item={menu}
+										key={index}
+										action={action}
+										active={active}
+									/>
+								})}
+							</React.Fragment>
+							<Logout />
+						</div>
+					)
+				}
+			}
+		</RootContext.Consumer>
 	)
 }
 

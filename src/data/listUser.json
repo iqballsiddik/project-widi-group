@@ -1,0 +1,21 @@
+{
+    "data": [{
+            "id": "1",
+            "username": "iqbal siddik",
+            "type": "admin",
+            "email": "iqball@gmail.com"
+        },
+        {
+            "id": "2",
+            "username": "kibo",
+            "type": "user",
+            "email": "kib@gmail.com"
+        },
+        {
+            "id": "3",
+            "username": "Gani",
+            "type": "user",
+            "email": "gani@gmail.com"
+        }
+    ]
+}

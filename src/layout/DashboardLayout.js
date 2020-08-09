@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'reactstrap';
 
 const DashboardLayout = ({ sidebar, mainsection }) => {
 	const styleContainer = { margin: "0", boxSizing: "border-box", height: "100vh", width: "100vw", backgroundColor: "#f4f5ff" }
-	const styleSidebar = { margin: "0", padding: "5px" };
+	const styleSidebar = { margin: "0", padding: "0" };
 	const styleMain = { margin: "0", height: "100%", overflowY: "auto" };
 	return (
 		<Row style={styleContainer}>

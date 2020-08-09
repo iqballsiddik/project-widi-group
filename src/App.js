@@ -8,15 +8,22 @@ import {
   Link
 } from "react-router-dom";
 
-import Dashboard from '../src/views/Dashboard';
+import Admin from '../src/views/Dashboard';
 import Login from './views/Login';
+import Register from './views/Register';
+import { Provider } from './context';
+import Users from './views/Dashboard/users';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path='/' exact component={Dashboard} />
-        <Route path='/login' exact component={Login} />
+        <Provider>
+          <Route path='/' exact component={Login} />
+          <Route path='/admin' exact component={Admin} />
+          <Route path='/user' exact component={Users} />
+          <Route path='/register' exact component={Register} />
+        </Provider>
       </Switch>
     </Router>
   );

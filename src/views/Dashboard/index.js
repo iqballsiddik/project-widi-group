@@ -1,17 +1,20 @@
 import React from 'react';
 import DashboardLayout from "../../layout/DashboardLayout";
-import Sidebar from "../../components/sidebar";
-import pages from "../Pages"
+import Sidebar from "../../components/Sidebar";
+import PageDashboard from "../Pages/PageDashboard"
+import PageAddUser from '../Pages/AddUsers';
+import PageListUser from '../Pages/ListUsers';
+import AdminProvider from '../../context/AdminProvider';
 
-const Test = ({ item }) => <div>{item}</div>
 
 const MainSectionViewer = ({ item }) => {
 	return (
 		<React.Fragment>
 			{
 				{
-					"menu1": <p>kjhgf</p>,
-					"menu4": <p>Form</p>,
+					"Dashboard": <PageDashboard />,
+					"Add User": <PageAddUser />,
+					"List User": <PageListUser />
 				}[item]
 			}
 		</React.Fragment>
@@ -19,14 +22,16 @@ const MainSectionViewer = ({ item }) => {
 }
 
 const Admin = () => {
-	const [menu, setMenu] = React.useState("menu1");
+	const [menu, setMenu] = React.useState("Dashboard");
 	const changeMainSectionView = (item) => setMenu(item);
 
 	return (
-		<DashboardLayout
-			sidebar={<Sidebar active={menu} action={changeMainSectionView} />}
-			mainsection={<MainSectionViewer item={menu} />}
-		/>
+		<AdminProvider>
+			<DashboardLayout
+				sidebar={<Sidebar active={menu} action={changeMainSectionView} />}
+				mainsection={<MainSectionViewer item={menu} />}
+			/>
+		</AdminProvider>
 	)
 }
 

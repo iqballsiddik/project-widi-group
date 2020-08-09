@@ -1,23 +1,23 @@
 body,
-text{
+text {
     font-weight: 600 !important;
 }
 
-.wrap-login{
+.wrap-login {
     width: 30%;
     position: relative;
     display: block;
     padding: 10px !important;
     margin: 10px 0 10px 0 !important;
     top: -50% !important;
-    transform: translate(0,100%) !important;
+    transform: translate(0, 100%) !important;
 }
 
-.wrap-login .lbl-login{
+.wrap-login .lbl-login {
     display: block;
 }
 
-.wrap-login .input{
+.wrap-login .input {
     width: 100%;
     color: #999;
     background-color: #222;
@@ -29,7 +29,7 @@ text{
     padding: 10px !important;
 }
 
-.wrap-login .input:focus{
+.wrap-login .input:focus {
     color: #999;
     background-color: #fff;
     border: 1 solid #000 !important;
@@ -37,61 +37,72 @@ text{
     transition: ease-in 1s;
 }
 
-.btn-login{
+.btn-login {
     display: block;
     padding: 10px;
     width: 81%;
     border-radius: 6px;
-    border: none !important;
-    background-color: #666;
+    border-color: #999 !important;
+    border: none;
+    background-color: #fff !important;
+    color: #000 !important;
     margin: 10px 10px 0 40px;
 }
 
-.btn-login:hover{
-    color: #fff;
-    background-color: #999;
+.btn-login:hover {
+    color: #fff !important;
+    background-color: #000 !important;
     transition: ease-in 0.5s;
 }
 
-.forgot-pass{
+.forgot-pass {
     font-size: 8px;
     font-weight: bold;
     color: rgb(139, 15, 15);
 }
 
-.forgot-pass:hover{
-    color: rgba(139, 15, 15, 0.6);;
+.forgot-pass:hover {
+    color: rgba(139, 15, 15, 0.6);
+    ;
 }
 
-@media only screen and (max-width: 1024px){
-    .wrap-login{
+.btn-register {
+    background-color: #fff;
+    border: none;
+    color: #000;
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 1024px) {
+    .wrap-login {
         width: 100%;
     }
-    .wrap-login .input{
+
+    .wrap-login .input {
         margin: 0 60px 0 0;
     }
 }
 
-@media only screen and (max-width: 720px){
-    .wrap-login{
+@media only screen and (max-width: 720px) {
+    .wrap-login {
         width: 100%;
     }
 }
 
-@media only screen and (max-width: 420px){
-    .wrap-login{
+@media only screen and (max-width: 420px) {
+    .wrap-login {
         width: 100%;
     }
 }
 
-@media only screen and (max-width: 375px){
-    .wrap-login{
+@media only screen and (max-width: 375px) {
+    .wrap-login {
         width: 100%;
     }
 }
 
-@media only screen and (max-width: 144px){
-    .wrap-login{
+@media only screen and (max-width: 144px) {
+    .wrap-login {
         width: 100%;
     }
 }
