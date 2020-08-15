@@ -8,8 +8,9 @@ import {
 } from "react-router-dom";
 import styles from './Sidebar.module.css';
 import RootContext from '../../context';
+import { style } from 'd3';
 
-const MenuItem = ({ item, keys, action, active }) => {
+const ItemMenu = ({ item, keys, action, active }) => {
 	const onClick = () => action(item);
 	// buat style untuk active
 	const customStyle = {
@@ -18,6 +19,9 @@ const MenuItem = ({ item, keys, action, active }) => {
 	}
 	return (
 		// menampilkan button side menu
+		// <div className={styles.button} style={customStyle} onClick={onClick} key={keys}>
+		// 	<b>{item}</b>
+		// </div>
 		<div className={styles.button} style={customStyle} onClick={onClick} key={keys}>
 			<b>{item}</b>
 		</div>
@@ -45,14 +49,14 @@ const Sidebar = ({ active, action }) => {
 			{
 				({ menulist }) => {
 					return (
-						<div className={styles.card}>
+						<div>
 							<div className="mt-4">
 								<h5 style={{ color: '#000' }}>WIDI GROUP</h5>
 							</div>
 							<React.Fragment>
 								{/*  manu di looping sebanyak kirim menulist */}
 								{menulist.map((menu, index) => {
-									return <MenuItem
+									return <ItemMenu
 										item={menu}
 										key={index}
 										action={action}
