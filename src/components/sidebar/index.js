@@ -10,7 +10,6 @@ import styles from './Sidebar.module.css';
 import RootContext from '../../context';
 
 const MenuItem = ({ item, keys, action, active }) => {
-	console.log(active, "this");
 	const onClick = () => action(item);
 	// buat style untuk active
 	const customStyle = {
@@ -41,13 +40,15 @@ const Logout = () => {
 
 const Sidebar = ({ active, action }) => {
 	return (
-		// Consumer dari value AdminProvider
+		// Consumer dari value AdminProviderx
 		<RootContext.Consumer>
 			{
 				({ menulist }) => {
 					return (
 						<div className={styles.card}>
-							<h1>logo</h1>
+							<div className="mt-4">
+								<h5 style={{ color: '#000' }}>WIDI GROUP</h5>
+							</div>
 							<React.Fragment>
 								{/*  manu di looping sebanyak kirim menulist */}
 								{menulist.map((menu, index) => {

@@ -65,7 +65,7 @@ export default function FormOrder() {
                 <FormGroup row>
                     <Label for="jumlahBarang" sm={2}>Jumlah Barang</Label>
                     <Col sm={10}>
-                        <Input type="text" pattern="[0-9]*" name="jumlahBarang" id="jumlahBarang" onChange={(e) => setJumlahBarang(e.target.value)} />
+                        <Input type="number" pattern="[0-9]*" name="jumlahBarang" id="jumlahBarang" onChange={(e) => setJumlahBarang(e.target.value)} />
                         <div className="ml-1">
                             <p style={{ color: "red" }}>{errorJumlahBarang}</p>
                         </div>
@@ -74,7 +74,7 @@ export default function FormOrder() {
                 <FormGroup row>
                     <Label for="hargaBarang" sm={2}>Harga Barang</Label>
                     <Col sm={10}>
-                        <Input type="text" name="hargaBarang" id="hargaBarang" onChange={(e) => setHargaBarang(e.target.value)} />
+                        <Input type="number" name="hargaBarang" id="hargaBarang" onChange={(e) => setHargaBarang(e.target.value)} />
                         <div className="ml-1">
                             <p style={{ color: "red" }}>{errorHargaBarang}</p>
                         </div>

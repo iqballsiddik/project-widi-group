@@ -3,6 +3,7 @@ import UsersProvider from '../../context/UsersProvider';
 import DashboardLayout from '../../layout/DashboardLayout';
 import Sidebar from '../../components/Sidebar';
 import PageInputOrder from '../Pages/InputOrder';
+import PageOrderUsers from '../Pages/PageOrderUsers';
 
 const MainSectionViewer = ({ item }) => {
     return (
@@ -11,7 +12,7 @@ const MainSectionViewer = ({ item }) => {
                 {
                     "Dashboard": <p>ini Users Dashboard</p>,
                     "Order": <PageInputOrder />,
-                    "List Order": <p>List Order</p>,
+                    "List Order": <PageOrderUsers />
                 }[item]
             }
         </React.Fragment>

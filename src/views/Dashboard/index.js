@@ -5,6 +5,8 @@ import PageDashboard from "../Pages/PageDashboard"
 import PageAddUser from '../Pages/AddUsers';
 import PageListUser from '../Pages/ListUsers';
 import AdminProvider from '../../context/AdminProvider';
+import TableOrder from '../../components/Table/TableOrder';
+import PageInputOrder from '../Pages/InputOrder';
 
 
 const MainSectionViewer = ({ item }) => {
@@ -14,7 +16,8 @@ const MainSectionViewer = ({ item }) => {
 				{
 					"Dashboard": <PageDashboard />,
 					"Add User": <PageAddUser />,
-					"List User": <PageListUser />
+					"List User": <PageListUser />,
+					"Order": <PageInputOrder />
 				}[item]
 			}
 		</React.Fragment>
