@@ -3,17 +3,21 @@ import { Table } from 'reactstrap';
 
 export default function TableOrder() {
     return (
-        <div>
+        <div className="mt-3">
+            <h1>List Users</h1>
+            <hr />
             <Table responsive dark>
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Table heading</th>
-                        <th>Table heading</th>
-                        <th>Table heading</th>
-                        <th>Table heading</th>
-                        <th>Table heading</th>
-                        <th>Table heading</th>
+                        <th>No</th>
+                        <th>Kategory Barang</th>
+                        <th>Jenis Barang</th>
+                        <th>Nama Barang</th>
+                        <th>Jumlah Barang</th>
+                        <th>Harga Barang</th>
+                        <th>Detail Barang</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,22 +25,6 @@ export default function TableOrder() {
                         <th scope="row">1</th>
                         <td>Table cell</td>
                         <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
                         <td>Table cell</td>
                         <td>Table cell</td>
                         <td>Table cell</td>

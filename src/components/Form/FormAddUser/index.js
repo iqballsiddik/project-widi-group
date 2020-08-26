@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Col, Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
+import axios from 'axios';
+
 
 export default function FormAddUser() {
     const [username, setUsername] = useState('')
@@ -12,14 +14,13 @@ export default function FormAddUser() {
     const [errorPassword, setErrorPassword] = useState('')
     const [errorConfirmPassword, setErrorConfirmPassword] = useState('')
     const [errorTypeRole, setErrorTypeRole] = useState('')
+    const [alertField, setAlertField] = useState('')
+    const [alertSuccess, setAlertSuccess] = useState('')
+    const [visible, setVisible] = useState(true);
 
-
+    const onDismiss = () => setVisible(false);
 
     const handleFormSubmit = async () => {
-        let formData = new FormData();
-        formData.append('username', username);
-        formData.append('email', email);
-        formData.append('password', password);
         if (username === '') {
             setErrorUsername('Username harus diisi')
         }
@@ -39,15 +40,49 @@ export default function FormAddUser() {
         if (password !== confirmPassword) {
             setErrorConfirmPassword('Password anda tidak sesuai')
         }
-    }
 
+        var objData = {
+            email: email,
+            password: password,
+            nickname: username,
+            role: typeRole
+        }
+
+        var jsonData = JSON.stringify(objData);
+
+        await axios.post(`http://ec2-13-212-53-107.ap-southeast-1.compute.amazonaws.com:8080/users`, jsonData)
+            .then(function (res) {
+                if (res.status !== 201) { setAlertField("Add User Gagal") }
+
+                if (res.status == 201) {
+                    setAlertSuccess("Add User Berhasil")
+                    setUsername('')
+                    setEmail('')
+                    setPassword('')
+                    setConfirmPassword('')
+                    setTypeRole('')
+                }
+            })
+    }
     return (
         <div>
             <Form>
+                {
+                    alertField == '' ? ''
+                        : <Alert color="info" isOpen={visible} toggle={onDismiss}>
+                            {alertField}
+                        </Alert>
+                }
+                {
+                    alertSuccess == '' ? '' :
+                        <Alert color="info" isOpen={visible} toggle={onDismiss}>
+                            {alertSuccess}
+                        </Alert>
+                }
                 <FormGroup row>
                     <Label for="username" sm={2}>Username</Label>
                     <Col sm={10}>
-                        <Input type="text" name="username" id="username" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
+                        <Input type="text" name="username" id="username" value={username} onChange={(e) => setUsername(e.target.value)} />
                         <div className="ml-1">
                             <p style={{ color: "red" }}>{errorUsername}</p>
                         </div>
@@ -56,19 +91,19 @@ export default function FormAddUser() {
                 <FormGroup row>
                     <Label for="email" sm={2}>Email</Label>
                     <Col sm={10}>
-                        <Input type="email" name="email" id="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+                        <Input type="email" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                         <div className="ml-1">
                             <p style={{ color: "red" }}>{errorEmail}</p>
                         </div>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
-                    <Label for="exampleSelect" sm={2}>Select Role</Label>
+                    <Label for="exampleSelect" sm={2}>Pilih Role</Label>
                     <Col sm={10}>
                         <Input type="select" onChange={(e) => setTypeRole(e.target.value)} name="select" id="exampleSelect">
-                            <option>Select Type Role</option>
-                            <option>Admin</option>
-                            <option>User</option>
+                            <option value={''}>Pilih Role</option>
+                            <option value={"Admin"}>Admin</option>
+                            <option value={"Users"}>User</option>
                         </Input>
                         <div className="ml-1">
                             <p style={{ color: "red" }}>{errorTypeRole}</p>
@@ -78,7 +113,7 @@ export default function FormAddUser() {
                 <FormGroup row>
                     <Label for="password" sm={2}>Password</Label>
                     <Col sm={10}>
-                        <Input type="password" name="password" id="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                        <Input type="password" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                         <div className="ml-1">
                             <p style={{ color: "red" }}>{errorPassword}</p>
                         </div>
@@ -87,7 +122,7 @@ export default function FormAddUser() {
                 <FormGroup row>
                     <Label for="confirmPassword" sm={2}>Confirm Password</Label>
                     <Col sm={10}>
-                        <Input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)} />
+                        <Input type="password" name="confirmPassword" id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                         <div className="ml-1">
                             <p style={{ color: "red" }}>{errorConfirmPassword}</p>
                         </div>

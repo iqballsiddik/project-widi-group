@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import { Col, Button, Form, FormGroup, Input } from 'reactstrap';
+import axios from 'axios';
+import { useHistory } from 'react-router';
+import API from '../../services';
 
 export default function Register() {
+    const history = useHistory();
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [typeRole, setTypeRole] = useState('');
     const [isLoading, setLoading] = useState(false)
     const [errorUsername, setErrorUsername] = useState('')
     const [errorEmail, setErrorEmail] = useState('')
     const [errorPassword, setErrorPassword] = useState('')
     const [errorConfirmPassword, setErrorConfirmPassword] = useState('')
+    const [errorRole, setErrorRole] = useState('')
 
 
     const changeUsername = (e) => setUsername(e.target.value)
@@ -19,10 +25,7 @@ export default function Register() {
     const changeConfirmPass = (e) => setConfirmPassword(e.target.value)
 
     const handleFormSubmit = async () => {
-        let formData = new FormData();
-        formData.append('username', username);
-        formData.append('email', email);
-        formData.append('password', password);
+
         if (username === '') {
             setErrorUsername('Username harus diisi')
         }
@@ -36,11 +39,32 @@ export default function Register() {
             setErrorConfirmPassword('Confirm Password harus diisi')
         }
 
+        if (typeRole === '') {
+            setErrorRole('Anda Belum memilih Role')
+        }
+
         if (password != confirmPassword) {
             setErrorConfirmPassword('Password anda tidak sesuai')
         }
-    }
 
+        var objData = {
+            email: email,
+            password: password,
+            nickname: username,
+            role: typeRole
+        }
+
+        var data = JSON.stringify(objData);
+
+        API.postRegister(data)
+            .then(res => {
+                if (res.status !== 201) { history.push(`/register`) }
+
+                if (res.status == 201) {
+                    history.push(`/login`)
+                }
+            })
+    }
     return (
         <>
             <div className="d-flex justify-content-center">
@@ -62,6 +86,18 @@ export default function Register() {
                                 <Input className="input" type="email" name="email" id="exampleEmail" placeholder="Email.." onChange={changeEmail} />
                                 <div className="ml-5">
                                     <p style={{ color: "red" }}>{errorEmail}</p>
+                                </div>
+                            </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                            <Col sm={10} style={{ marginLeft: "40px" }}>
+                                <Input type="select" name="typeRole" id="exampleSelect" onChange={(e) => setTypeRole(e.target.value)}>
+                                    <option value={''}>Pilih Role</option>
+                                    <option value={"Admin"}>Admin</option>
+                                    <option value={"Users"}>Users</option>
+                                </Input>
+                                <div className="ml-5">
+                                    <p style={{ color: "red" }}>{errorRole}</p>
                                 </div>
                             </Col>
                         </FormGroup>

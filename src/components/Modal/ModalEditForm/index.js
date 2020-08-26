@@ -8,7 +8,6 @@ export default function ModalEditForm(props) {
     const [namaBarang, setNamaBarang] = useState('')
     const [jumlahBarang, setJumlahBarang] = useState('')
     const [hargaBarang, setHargaBarang] = useState('')
-    console.log(jenisBarang);
     return (
         <div>
             <Modal isOpen={modal} toggle={toggle} >

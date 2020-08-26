@@ -15,7 +15,7 @@ const ItemMenu = ({ item, keys, action, active }) => {
 	// buat style untuk active
 	const customStyle = {
 		background: `${(active === item) ? "#f4f5ff" : "#d9dbf9"}`,
-		padding: '15px'
+		// padding: '15px'
 	}
 	return (
 		// menampilkan button side menu
@@ -31,12 +31,14 @@ const ItemMenu = ({ item, keys, action, active }) => {
 const Logout = () => {
 	const history = useHistory();
 	const onClick = () => {
+		window.localStorage.removeItem('token');
 		window.localStorage.removeItem('role');
+		window.localStorage.clear();
 		history.push('/');
 	};
 
 	return (
-		<div className={styles.button} onClick={onClick}>
+		<div className={styles.btnLogout} onClick={onClick}>
 			<Button color="danger">LOGOUT</Button>{' '}
 		</div>
 	)
@@ -49,8 +51,8 @@ const Sidebar = ({ active, action }) => {
 			{
 				({ menulist }) => {
 					return (
-						<div>
-							<div className="mt-4">
+						<div className={styles.sidebar}>
+							<div className={styles.logo} >
 								<h5 style={{ color: '#000' }}>WIDI GROUP</h5>
 							</div>
 							<React.Fragment>

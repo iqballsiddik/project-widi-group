@@ -22,7 +22,8 @@ const MainSectionViewer = ({ item }) => {
 export default function Users() {
     const [menu, setMenu] = React.useState("Dashboard");
     const changeMainSectionView = (item) => setMenu(item);
-
+    const token = localStorage.getItem('token');
+    const role = window.localStorage.getItem('role');
     return (
         <UsersProvider>
             <DashboardLayout

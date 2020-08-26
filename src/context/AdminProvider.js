@@ -6,7 +6,7 @@ import RootContext from './index';
 class AdminProvider extends Component {
     render() {
         return (
-            <RootContext.Provider value={{ menulist: ["Dashboard", "Add User", "List User", "Order"] }}>
+            <RootContext.Provider value={{ menulist: ["Dashboard", "Add User", "List User", "Order", "List Order"] }}>
                 {this.props.children}
             </RootContext.Provider>
         )

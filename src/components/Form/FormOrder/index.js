@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Col, Button, Form, FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 export default function FormOrder() {
     const [jenisBarang, setJenisBarang] = useState('')
@@ -41,6 +42,7 @@ export default function FormOrder() {
         }
         console.log(uploadBarang);
     }
+
     return (
         <div>
             <Form>

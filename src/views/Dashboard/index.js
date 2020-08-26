@@ -17,7 +17,8 @@ const MainSectionViewer = ({ item }) => {
 					"Dashboard": <PageDashboard />,
 					"Add User": <PageAddUser />,
 					"List User": <PageListUser />,
-					"Order": <PageInputOrder />
+					"Order": <PageInputOrder />,
+					"List Order": <TableOrder />
 				}[item]
 			}
 		</React.Fragment>
@@ -27,7 +28,6 @@ const MainSectionViewer = ({ item }) => {
 const Admin = () => {
 	const [menu, setMenu] = React.useState("Dashboard");
 	const changeMainSectionView = (item) => setMenu(item);
-
 	return (
 		<AdminProvider>
 			<DashboardLayout
