@@ -1,27 +1,27 @@
 import React, { useState } from 'react';
 import { Col, Button, Form, FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import API from '../../../services';
+import axios from 'axios';
 
 export default function FormOrder() {
     const [jenisBarang, setJenisBarang] = useState('')
     const [namaBarang, setNamaBarang] = useState('')
     const [jumlahBarang, setJumlahBarang] = useState('')
     const [hargaBarang, setHargaBarang] = useState('')
+    const [category, setCategory] = useState('')
     const [uploadBarang, setUploadBarang] = useState('')
     const [errorJenisBarang, setErrorJenisBarang] = useState('')
     const [errorNamaBarang, setErrorNamaBarang] = useState('')
     const [errorJumlahBarang, setErrorJumlahBarang] = useState('')
     const [errorHargaBarang, setErrorHargaBarang] = useState('')
+    const [errorCategory, setErrorCategory] = useState('')
     const [errorUploadBarang, setErrorUploadBarang] = useState('')
 
-    const handleFormSubmit = async () => {
-        let formData = new FormData()
-        formData.append('jenisBarang', jenisBarang);
-        formData.append('namaBarang', namaBarang);
-        formData.append('jumlahBarang', jumlahBarang);
-        formData.append('hargaBarang', hargaBarang);
-        formData.append('uploadBarang', uploadBarang);
+    const token = window.localStorage.getItem('token')
+    const id = window.localStorage.getItem('id')
 
+    const handleFormSubmit = async () => {
         if (jenisBarang === '') {
             setErrorJenisBarang('Jenis Barang harus diisi')
         }
@@ -34,18 +34,56 @@ export default function FormOrder() {
         if (hargaBarang === '') {
             setErrorHargaBarang('Jumlah Barang harus diisi')
         }
-        if (uploadBarang === '') {
-            setUploadBarang('Upload Foto Barang harus diisi')
+        if (category === '') {
+            setErrorCategory('Category Foto Barang harus diisi')
         }
         if (uploadBarang === '') {
             setUploadBarang('Upload Foto Barang harus diisi')
         }
-        console.log(uploadBarang);
+        let formData = new FormData();
+        formData.append('user_id', id)
+        formData.append('type', jenisBarang)
+        formData.append('name', namaBarang)
+        formData.append('category', category)
+        formData.append('total', jumlahBarang)
+        formData.append('price', hargaBarang)
+
+        // var objData = {
+        //     user_id: id,
+        //     type: jenisBarang,
+        //     name: namaBarang,
+        //     category: category,
+        //     total: jumlahBarang,
+        //     price: hargaBarang
+        // }
+
+        // var data = JSON.stringify(objData);
+
+        var config = {
+            headers: { Authorization: `Bearer ${token}` }
+        }
+
+        // API.postOrder(formData, config).then(res => {
+        //     console.log("===>", res)
+        // })
+        axios.post('http://ec2-13-212-53-107.ap-southeast-1.compute.amazonaws.com:8080/orders', formData, config)
+            .then(res => {
+                console.log("==>", res)
+            })
     }
 
     return (
         <div>
             <Form>
+                <FormGroup row>
+                    <Label for="jenisBarang" sm={2}>Kategory Barang</Label>
+                    <Col sm={10}>
+                        <Input type="text" name="category" id="category" onChange={(e) => setCategory(e.target.value)} />
+                        <div className="ml-1">
+                            <p style={{ color: "red" }}>{errorCategory}</p>
+                        </div>
+                    </Col>
+                </FormGroup>
                 <FormGroup row>
                     <Label for="jenisBarang" sm={2}>Jenis Barang</Label>
                     <Col sm={10}>

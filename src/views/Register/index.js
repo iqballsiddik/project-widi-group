@@ -10,7 +10,7 @@ export default function Register() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
-    const [typeRole, setTypeRole] = useState('');
+    const [typeRole, setTypeRole] = useState('Users');
     const [isLoading, setLoading] = useState(false)
     const [errorUsername, setErrorUsername] = useState('')
     const [errorEmail, setErrorEmail] = useState('')
@@ -89,7 +89,7 @@ export default function Register() {
                                 </div>
                             </Col>
                         </FormGroup>
-                        <FormGroup row>
+                        {/* <FormGroup row>
                             <Col sm={10} style={{ marginLeft: "40px" }}>
                                 <Input type="select" name="typeRole" id="exampleSelect" onChange={(e) => setTypeRole(e.target.value)}>
                                     <option value={''}>Pilih Role</option>
@@ -100,7 +100,7 @@ export default function Register() {
                                     <p style={{ color: "red" }}>{errorRole}</p>
                                 </div>
                             </Col>
-                        </FormGroup>
+                        </FormGroup> */}
                         <FormGroup row>
                             <Col sm={10}>
                                 <Input className="input" type="password" name="password" id="examplePassword" placeholder="Password" onChange={changePassword} />

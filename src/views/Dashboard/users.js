@@ -4,13 +4,14 @@ import DashboardLayout from '../../layout/DashboardLayout';
 import Sidebar from '../../components/Sidebar';
 import PageInputOrder from '../Pages/InputOrder';
 import PageOrderUsers from '../Pages/PageOrderUsers';
+import PageDashboard from '../Pages/PageDashboard';
 
 const MainSectionViewer = ({ item }) => {
     return (
         <React.Fragment>
             {
                 {
-                    "Dashboard": <p>ini Users Dashboard</p>,
+                    "Dashboard": <PageDashboard />,
                     "Order": <PageInputOrder />,
                     "List Order": <PageOrderUsers />
                 }[item]

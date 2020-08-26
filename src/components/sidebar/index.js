@@ -34,7 +34,7 @@ const Logout = () => {
 		window.localStorage.removeItem('token');
 		window.localStorage.removeItem('role');
 		window.localStorage.clear();
-		history.push('/');
+		history.push('/login');
 	};
 
 	return (
