@@ -14,7 +14,7 @@ const ItemMenu = ({ item, keys, action, active }) => {
 	const onClick = () => action(item);
 	// buat style untuk active
 	const customStyle = {
-		background: `${(active === item) ? "#f4f5ff" : "#d9dbf9"}`,
+		background: `${(active === item) ? "#F55280" : "#323757"}`,
 		// padding: '15px'
 	}
 	return (
@@ -53,7 +53,7 @@ const Sidebar = ({ active, action }) => {
 					return (
 						<div className={styles.sidebar}>
 							<div className={styles.logo} >
-								<h5 style={{ color: '#000' }}>WIDI GROUP</h5>
+								<h5 style={{ color: '#ffff' }}>WIDI GROUP</h5>
 							</div>
 							<React.Fragment>
 								{/*  manu di looping sebanyak kirim menulist */}

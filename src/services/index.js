@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const rootPath = 'http://ec2-13-212-53-107.ap-southeast-1.compute.amazonaws.com:8080';
+const rootPath = 'https://widi-group-backend.herokuapp.com';
 
 const Get = (path) => {
     const promise = new Promise((resolve, reject) => {

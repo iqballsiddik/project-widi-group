@@ -40,36 +40,51 @@ export default function FormOrder() {
         if (uploadBarang === '') {
             setUploadBarang('Upload Foto Barang harus diisi')
         }
-        let formData = new FormData();
-        formData.append('user_id', id)
-        formData.append('type', jenisBarang)
-        formData.append('name', namaBarang)
-        formData.append('category', category)
-        formData.append('total', jumlahBarang)
-        formData.append('price', hargaBarang)
+        // let formData = new FormData();
+        // formData.append('user_id', id)
+        // formData.append('type', jenisBarang)
+        // formData.append('name', namaBarang)
+        // formData.append('category', category)
+        // formData.append('total', jumlahBarang)
+        // formData.append('price', hargaBarang)
 
-        // var objData = {
-        //     user_id: id,
-        //     type: jenisBarang,
-        //     name: namaBarang,
-        //     category: category,
-        //     total: jumlahBarang,
-        //     price: hargaBarang
-        // }
-
-        // var data = JSON.stringify(objData);
-
-        var config = {
-            headers: { Authorization: `Bearer ${token}` }
+        var objData = {
+            user_id: id,
+            type: jenisBarang,
+            name: namaBarang,
+            category: category,
+            total: jumlahBarang,
+            price: hargaBarang,
+            status: "prosses"
         }
 
+        var data = JSON.stringify(objData);
+
+        var config = {
+            headers: { "Authorization": `Bearer ${token}` }
+        }
         // API.postOrder(formData, config).then(res => {
         //     console.log("===>", res)
         // })
-        axios.post('http://ec2-13-212-53-107.ap-southeast-1.compute.amazonaws.com:8080/orders', formData, config)
+        // axios.post('https://widi-group-backend.herokuapp.com/orders', data, {
+        //     headers: { "Authorization": tokenData }
+        // }).then(res => {
+        //     console.log("==>", res)
+        // })
+
+        const tokenData = "Bearer " + token
+        axios.post(' https://widi-group-backend.herokuapp.com/orders', data, {
+            headers: {
+                'Authorization': tokenData,
+            }
+        })
             .then(res => {
                 console.log("==>", res)
             })
+            .catch(err => {
+                console.log(err)
+            })
+
     }
 
     return (

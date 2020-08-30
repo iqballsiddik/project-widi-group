@@ -3,6 +3,7 @@ import { Col, Button, Form, FormGroup, Input } from 'reactstrap';
 import axios from 'axios';
 import { useHistory } from 'react-router';
 import API from '../../services';
+import './style.css'
 
 export default function Register() {
     const history = useHistory();
@@ -67,58 +68,48 @@ export default function Register() {
     }
     return (
         <>
-            <div className="d-flex justify-content-center">
-                <div className="wrap-login">
-                    <div className="d-flex justify-content-center mb-3">
-                        <h2>Register</h2>
+            <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh", background: "#323757" }}>
+                <div className="wrap-regis">
+                    <div className="d-flex justify-content-center mb-3 regis" >
+                        <h2>Sign Up</h2>
                     </div>
                     <Form>
-                        <FormGroup row>
-                            <Col sm={10}>
-                                <Input className="input" type="text" name="username" id="username" placeholder="Username.." onChange={changeUsername} />
-                                <div className="ml-5">
-                                    <p style={{ color: "red" }}>{errorUsername}</p>
-                                </div>
-                            </Col>
+                        <FormGroup >
+                            <Input className="input" type="text" name="username" id="username" placeholder="Username.." onChange={changeUsername} style={{ margin: "0" }} />
+                            <div className="">
+                                <p style={{ color: "red" }}>{errorUsername}</p>
+                            </div>
                         </FormGroup>
-                        <FormGroup row>
-                            <Col sm={10}>
-                                <Input className="input" type="email" name="email" id="exampleEmail" placeholder="Email.." onChange={changeEmail} />
-                                <div className="ml-5">
-                                    <p style={{ color: "red" }}>{errorEmail}</p>
-                                </div>
-                            </Col>
+                        <FormGroup >
+                            <Input className="input" type="email" name="email" id="exampleEmail" placeholder="Email.." onChange={changeEmail} style={{ margin: "0" }} />
+                            <div className="">
+                                <p style={{ color: "red" }}>{errorEmail}</p>
+                            </div>
                         </FormGroup>
-                        {/* <FormGroup row>
-                            <Col sm={10} style={{ marginLeft: "40px" }}>
-                                <Input type="select" name="typeRole" id="exampleSelect" onChange={(e) => setTypeRole(e.target.value)}>
-                                    <option value={''}>Pilih Role</option>
-                                    <option value={"Admin"}>Admin</option>
-                                    <option value={"Users"}>Users</option>
-                                </Input>
-                                <div className="ml-5">
-                                    <p style={{ color: "red" }}>{errorRole}</p>
-                                </div>
-                            </Col>
+                        {/* <FormGroup >
+                            <Input type="select" name="typeRole" id="exampleSelect" onChange={(e) => setTypeRole(e.target.value)}>
+                                <option value={''}>Pilih Role</option>
+                                <option value={"Admin"}>Admin</option>
+                                <option value={"Users"}>Users</option>
+                            </Input>
+                            <div className="ml-5">
+                                <p style={{ color: "red" }}>{errorRole}</p>
+                            </div>
                         </FormGroup> */}
-                        <FormGroup row>
-                            <Col sm={10}>
-                                <Input className="input" type="password" name="password" id="examplePassword" placeholder="Password" onChange={changePassword} />
-                                <div className="ml-5">
-                                    <p style={{ color: "red" }}>{errorPassword}</p>
-                                </div>
-                            </Col>
+                        <FormGroup >
+                            <Input className="input" type="password" name="password" id="examplePassword" placeholder="Password" onChange={changePassword} style={{ margin: "0" }} />
+                            <div className="">
+                                <p style={{ color: "red" }}>{errorPassword}</p>
+                            </div>
                         </FormGroup>
-                        <FormGroup row>
-                            <Col sm={10}>
-                                <Input className="input" type="password" name="password" id="examplePassword" placeholder="Confirm Password" onChange={changeConfirmPass} />
-                                <div className="ml-5">
-                                    <p style={{ color: "red" }}>{errorConfirmPassword}</p>
-                                </div>
-                            </Col>
+                        <FormGroup >
+                            <Input className="input" type="password" name="password" id="examplePassword" placeholder="Confirm Password" onChange={changeConfirmPass} style={{ margin: "0" }} />
+                            <div className="">
+                                <p style={{ color: "red" }}>{errorConfirmPassword}</p>
+                            </div>
                         </FormGroup>
-                        <Button className="btn-login" onClick={handleFormSubmit}>
-                            {isLoading ? <div>Loading....</div> : <span>Login</span>}
+                        <Button className="btn-regis" onClick={handleFormSubmit}>
+                            {isLoading ? <div>Loading....</div> : <span>Sign Up</span>}
                         </Button>
                     </Form>
                 </div>

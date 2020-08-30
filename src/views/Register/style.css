@@ -1,0 +1,24 @@
+.wrap-regis {
+    display: block;
+    width: 50%;
+}
+
+.regis {
+    color: #fff;
+}
+
+.btn-regis {
+    padding: 10px;
+    width: 100%;
+    border-radius: 6px;
+    border-color: #999 !important;
+    border: none;
+    background-color: #F55280 !important;
+    color: #ffff !important;
+}
+
+.btn-regis:hover {
+    color: #fff !important;
+    background-color: #000 !important;
+    transition: ease-in 0.5s;
+}
