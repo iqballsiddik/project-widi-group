@@ -5,15 +5,17 @@ import API from '../../../services';
 
 export default function ModalDeleteOrders({ modal, toggle, data }) {
 
+    let token = window.localStorage.getItem('token')
+
     const handleDelete = () => {
         let id = data.id;
-        let token = window.localStorage.getItem('token')
 
+        const tokenData = "Bearer " + token
         const config = {
-            headers: { Authorization: `Bearer ${token}` }
+            headers: { Authorization: tokenData }
         };
-
-        API.putDelete(id, config).then(res => {
+        API.deleteOrders(id, config).then(res => {
+            // PR belum kondisi close popup
             console.log(res)
         })
     }

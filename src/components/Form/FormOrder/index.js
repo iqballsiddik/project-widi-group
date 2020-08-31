@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Col, Button, Form, FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
+import { Col, Button, Form, FormGroup, Label, Input, FormText, FormFeedback, Alert } from 'reactstrap';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import API from '../../../services';
 import axios from 'axios';
@@ -17,9 +17,14 @@ export default function FormOrder() {
     const [errorHargaBarang, setErrorHargaBarang] = useState('')
     const [errorCategory, setErrorCategory] = useState('')
     const [errorUploadBarang, setErrorUploadBarang] = useState('')
+    const [error, setError] = useState('')
+    const [success, setSuccess] = useState('')
+    const [visible, setVisible] = useState(true);
+
 
     const token = window.localStorage.getItem('token')
     const id = window.localStorage.getItem('id')
+    const user_id = parseInt(id)
 
     const handleFormSubmit = async () => {
         if (jenisBarang === '') {
@@ -40,16 +45,9 @@ export default function FormOrder() {
         if (uploadBarang === '') {
             setUploadBarang('Upload Foto Barang harus diisi')
         }
-        // let formData = new FormData();
-        // formData.append('user_id', id)
-        // formData.append('type', jenisBarang)
-        // formData.append('name', namaBarang)
-        // formData.append('category', category)
-        // formData.append('total', jumlahBarang)
-        // formData.append('price', hargaBarang)
 
         var objData = {
-            user_id: id,
+            user_id,
             type: jenisBarang,
             name: namaBarang,
             category: category,
@@ -59,39 +57,56 @@ export default function FormOrder() {
         }
 
         var data = JSON.stringify(objData);
-
-        var config = {
-            headers: { "Authorization": `Bearer ${token}` }
-        }
-        // API.postOrder(formData, config).then(res => {
-        //     console.log("===>", res)
-        // })
-        // axios.post('https://widi-group-backend.herokuapp.com/orders', data, {
-        //     headers: { "Authorization": tokenData }
-        // }).then(res => {
-        //     console.log("==>", res)
-        // })
-
         const tokenData = "Bearer " + token
-        axios.post(' https://widi-group-backend.herokuapp.com/orders', data, {
-            headers: {
-                'Authorization': tokenData,
+        var config = {
+            headers: { "Authorization": tokenData }
+        }
+        API.postOrder(data, config).then(res => {
+            if (res.status !== 201) {
+                console.log('sampe')
+                return setError('Data gagal disimpan')
             }
+
+            if (res.status == 201) {
+                console.log(res)
+                setSuccess('Data Berhasil Disimpan')
+                setJenisBarang('')
+                setNamaBarang('')
+                setCategory('')
+                setJumlahBarang('')
+                setHargaBarang('')
+            }
+        }).catch(err => {
+            console.log(err)
         })
-            .then(res => {
-                console.log("==>", res)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+
+        // axios.post(' https://widi-group-backend.herokuapp.com/orders', data, config).then(res => {
+        //     console.log("==>", res)
+        // }).catch(err => {
+        //     console.log(err)
+        // })
 
     }
+
+    const onDismiss = () => setVisible(false);
 
     return (
         <div>
             <Form>
+                {
+                    success == '' ? '' :
+                        <Alert color="success" isOpen={visible} toggle={onDismiss}>
+                            {success}
+                        </Alert>
+                }
+                {
+                    error == '' ? '' :
+                        <Alert color="danger" isOpen={visible} toggle={onDismiss}>
+                            {error}
+                        </Alert>
+                }
                 <FormGroup row>
-                    <Label for="jenisBarang" sm={2}>Kategory Barang</Label>
+                    <Label for="kategoryBarang" sm={2}>Kategory Barang</Label>
                     <Col sm={10}>
                         <Input type="text" name="category" id="category" onChange={(e) => setCategory(e.target.value)} />
                         <div className="ml-1">

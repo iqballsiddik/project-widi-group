@@ -10,12 +10,14 @@ import ModalDeleteOrders from '../../Modal/ModalDelete';
 export default function TableOrderUsers() {
     const [modal, setModal] = useState(false);
     const [modalDelete, setModalDelete] = useState(false);
-    const toggle = () => setModal(!modal);
-    const toggleDelete = () => setModalDelete(!modalDelete);
     const [data, setData] = useState([]);
     const [dataNull, setDataNull] = useState('');
     const [dataUpdateOrder, setDataUpdateOrder] = useState('');
     const [dataDelete, setDataDelete] = useState('');
+
+
+    const toggle = () => setModal(!modal);
+    const toggleDelete = () => setModalDelete(!modalDelete);
 
     API.getOrders().then(res => {
         if (res.status == 400) {
@@ -25,10 +27,6 @@ export default function TableOrderUsers() {
             setData(res.data);
         }
     })
-
-    const handleDelete = () => {
-
-    }
 
     return (
         <div>

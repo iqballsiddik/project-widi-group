@@ -49,9 +49,9 @@ const PostOrder = (path, data, config) => {
     return promise;
 }
 
-const PutDeleteOrders = (path, id, config) => {
+const DeleteOrders = (path, id, config) => {
     const promise = new Promise((resolve, reject) => {
-        axios.put(`${rootPath}/${path}/${id}`, config)
+        axios.delete(`${rootPath}/${path}/${id}`, config)
             .then(res => {
                 resolve(res);
             }, (err) => {
@@ -69,14 +69,14 @@ const postOrder = (data, config) => PostOrder('orders', data, config)
 const getUsersData = () => Get('users');
 const getOrders = () => GetOrders('orders')
 // PUT
-const putDelete = (id, config) => PutDeleteOrders('orders', id, config)
+const deleteOrders = (id, config) => DeleteOrders('orders', id, config)
 
 const API = {
     getUsersData,
     postRegister,
     postOrder,
     getOrders,
-    putDelete,
+    deleteOrders,
 }
 
 export default API;
