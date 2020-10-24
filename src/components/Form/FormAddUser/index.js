@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Col, Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
 import axios from 'axios';
+import API from '../../../services';
+import { set } from 'd3';
 
 
 export default function FormAddUser() {
@@ -48,21 +50,21 @@ export default function FormAddUser() {
             role: typeRole
         }
 
-        var jsonData = JSON.stringify(objData);
+        var data = JSON.stringify(objData);
 
-        await axios.post(`http://ec2-13-212-53-107.ap-southeast-1.compute.amazonaws.com:8080/users`, jsonData)
-            .then(function (res) {
-                if (res.status !== 201) { setAlertField("Add User Gagal") }
-
-                if (res.status == 201) {
-                    setAlertSuccess("Add User Berhasil")
-                    setUsername('')
-                    setEmail('')
-                    setPassword('')
-                    setConfirmPassword('')
-                    setTypeRole('')
-                }
-            })
+        API.postRegister(data).then(res => {
+            if (res.status !== 201) { setAlertField("Add User Gagal") }
+            if (res.status === 201) {
+                setAlertSuccess('Data Berhasil Ditambah')
+                setUsername('')
+                setEmail('')
+                setPassword('')
+                setTypeRole('')
+                setConfirmPassword('')
+            }
+        }).catch(err => {
+            console.log("error bro")
+        })
     }
     return (
         <div>
@@ -100,7 +102,7 @@ export default function FormAddUser() {
                 <FormGroup row>
                     <Label for="exampleSelect" sm={2}>Pilih Role</Label>
                     <Col sm={10}>
-                        <Input type="select" onChange={(e) => setTypeRole(e.target.value)} name="select" id="exampleSelect">
+                        <Input type="select" onChange={(e) => setTypeRole(e.target.value)} name="select" value={typeRole} id="exampleSelect">
                             <option value={''}>Pilih Role</option>
                             <option value={"Admin"}>Admin</option>
                             <option value={"Users"}>User</option>

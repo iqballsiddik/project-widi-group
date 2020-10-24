@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import React from 'react'
+import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
 import API from '../../../services';
 
-export default function ModalDeleteOrders({ modal, toggle, data, handleAlert }) {
-
-    let token = window.localStorage.getItem('token')
+export default function ModalUsersDelete({ modal, toggle, data, handleAlertDelete, }) {
+    let token = window.localStorage.getItem('token');
+    // handle button delete YA
     const handleDelete = () => {
         let strId = data.id;
         const id = parseInt(strId);
@@ -12,15 +12,15 @@ export default function ModalDeleteOrders({ modal, toggle, data, handleAlert }) 
         const config = {
             headers: { "Authorization": tokenData }
         };
-        API.deleteOrders(id, config).then(res => {
+
+        API.deleteUsers(id, config).then(res => {
             if (res.status === 204) {
-                handleAlert()
+                handleAlertDelete()
             }
         }).catch(err => {
             console.log(err)
         })
     }
-
     return (
         <div>
             <Modal isOpen={modal} toggle={toggle} >

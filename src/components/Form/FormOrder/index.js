@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Col, Button, Form, FormGroup, Label, Input, FormText, FormFeedback, Alert } from 'reactstrap';
+import React, { useState, useEffect } from 'react';
+import { Col, Button, Form, FormGroup, Label, Input, FormText, Alert, Spinner } from 'reactstrap';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import API from '../../../services';
 import axios from 'axios';
@@ -10,6 +10,8 @@ export default function FormOrder() {
     const [jumlahBarang, setJumlahBarang] = useState('')
     const [hargaBarang, setHargaBarang] = useState('')
     const [category, setCategory] = useState('')
+    const [puskesmas, setPuskesmas] = useState('')
+    const [dataPuskesmas, setDataPuskesmas] = useState([])
     const [uploadBarang, setUploadBarang] = useState('')
     const [errorJenisBarang, setErrorJenisBarang] = useState('')
     const [errorNamaBarang, setErrorNamaBarang] = useState('')
@@ -20,12 +22,13 @@ export default function FormOrder() {
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
     const [visible, setVisible] = useState(true);
+    const [loading, setLoading] = useState(true);
 
 
     const token = window.localStorage.getItem('token')
     const id = window.localStorage.getItem('id')
     const user_id = parseInt(id)
-
+    console.log(user_id)
     const handleFormSubmit = async () => {
         if (jenisBarang === '') {
             setErrorJenisBarang('Jenis Barang harus diisi')
@@ -51,9 +54,10 @@ export default function FormOrder() {
             type: jenisBarang,
             name: namaBarang,
             category: category,
-            total: jumlahBarang,
-            price: hargaBarang,
-            status: "prosses"
+            total: "0",
+            price: "0",
+            status: "prosses",
+            puskesmas: puskesmas
         }
 
         var data = JSON.stringify(objData);
@@ -63,7 +67,6 @@ export default function FormOrder() {
         }
         API.postOrder(data, config).then(res => {
             if (res.status !== 201) {
-                console.log('sampe')
                 return setError('Data gagal disimpan')
             }
 
@@ -75,19 +78,20 @@ export default function FormOrder() {
                 setCategory('')
                 setJumlahBarang('')
                 setHargaBarang('')
+                setPuskesmas('')
             }
         }).catch(err => {
             console.log(err)
+            setError('Data Tidak ada ')
         })
-
-        // axios.post(' https://widi-group-backend.herokuapp.com/orders', data, config).then(res => {
-        //     console.log("==>", res)
-        // }).catch(err => {
-        //     console.log(err)
-        // })
-
     }
 
+    useEffect(() => {
+        API.getPuskesmas(user_id).then(res => {
+            setLoading(false)
+            setDataPuskesmas(res.data)
+        }).catch((err) => setError('Data Error'))
+    }, [])
     const onDismiss = () => setVisible(false);
 
     return (
@@ -106,18 +110,48 @@ export default function FormOrder() {
                         </Alert>
                 }
                 <FormGroup row>
+                    <Label for="exampleSelect" sm={2}>Pilih Puskesmas</Label>
+                    <Col sm={10}>
+                        {
+                            loading == true ? <Spinner color="primary" /> :
+                                <Input type="select" onChange={(e) => setPuskesmas(e.target.value)} name="select" value={puskesmas} id="exampleSelect">
+                                    <option value={''}>Pilih Kategori</option>
+                                    {
+                                        dataPuskesmas.map((val) => {
+                                            return (
+                                                <option value={val.name}>{val.name}</option>
+                                            )
+                                        })
+                                    }
+                                </Input>
+                        }
+                        {/* <div className="ml-1">
+                            <p style={{ color: "red" }}>{errorTypeRole}</p>
+                        </div> */}
+                    </Col>
+                </FormGroup>
+                <FormGroup row>
                     <Label for="kategoryBarang" sm={2}>Kategory Barang</Label>
                     <Col sm={10}>
-                        <Input type="text" name="category" id="category" onChange={(e) => setCategory(e.target.value)} />
-                        <div className="ml-1">
-                            <p style={{ color: "red" }}>{errorCategory}</p>
-                        </div>
+                        <Input type="select" onChange={(e) => setCategory(e.target.value)} name="category" value={category}>
+                            <option value={''}>Pilih Kategori</option>
+                            <option value={"1"}>1</option>
+                            <option value={"2"}>2</option>
+                            <option value={"3"}>3</option>
+                            <option value={"4"}>4</option>
+                            <option value={"5"}>5</option>
+                            <option value={"6"}>6</option>
+                            <option value={"7"}>7</option>
+                        </Input>
+                        {/* <div className="ml-1">
+                            <p style={{ color: "red" }}>{errorTypeRole}</p>
+                        </div> */}
                     </Col>
                 </FormGroup>
                 <FormGroup row>
                     <Label for="jenisBarang" sm={2}>Jenis Barang</Label>
                     <Col sm={10}>
-                        <Input type="text" name="jenisBarang" id="jenisBarang" onChange={(e) => setJenisBarang(e.target.value)} />
+                        <Input type="text" name="jenisBarang" id="jenisBarang" value={jenisBarang} onChange={(e) => setJenisBarang(e.target.value)} />
                         <div className="ml-1">
                             <p style={{ color: "red" }}>{errorJenisBarang}</p>
                         </div>
@@ -126,16 +160,16 @@ export default function FormOrder() {
                 <FormGroup row>
                     <Label for="namaBarang" sm={2}>Nama Barang</Label>
                     <Col sm={10}>
-                        <Input type="text" name="namaBarang" id="namaBarang" onChange={(e) => setNamaBarang(e.target.value)} />
+                        <Input type="text" name="namaBarang" id="namaBarang" value={namaBarang} onChange={(e) => setNamaBarang(e.target.value)} />
                         <div className="ml-1">
                             <p style={{ color: "red" }}>{errorNamaBarang}</p>
                         </div>
                     </Col>
                 </FormGroup>
-                <FormGroup row>
+                {/* <FormGroup row>
                     <Label for="jumlahBarang" sm={2}>Jumlah Barang</Label>
                     <Col sm={10}>
-                        <Input type="number" pattern="[0-9]*" name="jumlahBarang" id="jumlahBarang" onChange={(e) => setJumlahBarang(e.target.value)} />
+                        <Input type="number" pattern="[0-9]*" name="jumlahBarang" id="jumlahBarang" value={jumlahBarang} onChange={(e) => setJumlahBarang(e.target.value)} />
                         <div className="ml-1">
                             <p style={{ color: "red" }}>{errorJumlahBarang}</p>
                         </div>
@@ -144,12 +178,12 @@ export default function FormOrder() {
                 <FormGroup row>
                     <Label for="hargaBarang" sm={2}>Harga Barang</Label>
                     <Col sm={10}>
-                        <Input type="number" name="hargaBarang" id="hargaBarang" onChange={(e) => setHargaBarang(e.target.value)} />
+                        <Input type="number" name="hargaBarang" id="hargaBarang" value={hargaBarang} onChange={(e) => setHargaBarang(e.target.value)} />
                         <div className="ml-1">
                             <p style={{ color: "red" }}>{errorHargaBarang}</p>
                         </div>
                     </Col>
-                </FormGroup>
+                </FormGroup> */}
                 <FormGroup row>
                     <Label for="uploadBrang" sm={2}>Upload Foto Barang</Label>
                     <Col sm={10}>
@@ -168,6 +202,6 @@ export default function FormOrder() {
                     </Col>
                 </FormGroup>
             </Form>
-        </div>
+        </div >
     )
 }

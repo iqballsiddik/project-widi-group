@@ -53,7 +53,7 @@ const Sidebar = ({ active, action }) => {
 					return (
 						<div className={styles.sidebar}>
 							<div className={styles.logo} >
-								<h5 style={{ color: '#ffff' }}>WIDI GROUP</h5>
+								<h5 style={{ color: '#ffff' }}>Learn</h5>
 							</div>
 							<React.Fragment>
 								{/*  manu di looping sebanyak kirim menulist */}

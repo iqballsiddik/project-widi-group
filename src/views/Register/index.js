@@ -64,6 +64,8 @@ export default function Register() {
                 if (res.status == 201) {
                     history.push(`/login`)
                 }
+            }).catch(err => {
+                console.log("error inputan")
             })
     }
     return (
